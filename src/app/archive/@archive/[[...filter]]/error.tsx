@@ -1,6 +1,7 @@
 "use client";
 
-export default function Error({ error }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Error({ error }:any) {
   return (
     <>
       <h1>Error Occured</h1>
