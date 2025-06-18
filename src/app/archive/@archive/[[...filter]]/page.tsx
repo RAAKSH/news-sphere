@@ -7,7 +7,8 @@ import {
 } from "@/utils/news";
 import Link from "next/link";
 
-export default function Archive({ params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Archive({ params }:any) {
   const filter = params?.filter;
   console.log(filter?.[1]);
   const selectedYear = filter?.[0];

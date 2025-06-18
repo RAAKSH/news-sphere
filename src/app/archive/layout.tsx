@@ -1,6 +1,7 @@
 
 
-export default function ArchiveLayout({archive,latest}) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function ArchiveLayout({archive,latest}:any) {
   return (
     <div className="min-h-screen bg-black text-white  px-30">
         <h1 className="text-2xl p-1 pb-3">News Archive</h1>
