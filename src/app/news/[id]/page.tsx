@@ -1,5 +1,6 @@
 import { DUMMY_NEWS } from "@/app/dummyData";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 export default function newDetails({ params }) {
   const newsSlug = params?.id;
@@ -13,11 +14,12 @@ export default function newDetails({ params }) {
   return (
     <div className="min-h-screen bg-black text-white px-6 py-10">
       <div className="max-w-3xl mx-auto">
-        <img
+        <Link  href={`/news/${newsItem?.slug}/image`}>  <img
           src={`/images/${newsItem?.image}`}
           alt={newsItem?.title}
           className="w-full max-h-[400px] object-cover rounded-lg mb-6"
         />
+        </Link>
 
         <h1 className="text-4xl font-bold mb-2">{newsItem?.title}</h1>
         <span className="text-sm text-gray-400 block mb-6">
