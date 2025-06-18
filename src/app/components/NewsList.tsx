@@ -1,12 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+//import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
-export default function NewsList({news}: Record<string,unknown>) {
+type NewsItem = {
+  id: string | number;
+  slug: string;
+  image: string;
+  title: string;
+};
+
+
+type Props = {
+  news: NewsItem[];
+};
+
+
+export default function NewsList({news}: Props) {
   return (
     <div className="px-6 py-4  bg-black text-white">    
       <ul className="flex flex-wrap gap-10 p-10">
-        {news?.map((news: { id: Key | null | undefined; slug: unknown; image: unknown; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<unknown>> | Iterable<ReactNode> | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<unknown>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
+        {news?.map((news: NewsItem) => (
           <li key={news.id}>
             <Link href={`/news/${news.slug}`}>
               <div className="text-white w-80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
