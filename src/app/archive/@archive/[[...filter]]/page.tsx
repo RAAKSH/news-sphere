@@ -28,7 +28,7 @@ export default function Archive({ params }:any) {
   if (news && news.length > 0) {
     newsContent = <NewsList news={news} />;
   }
- if((selectedYear && !getAvailableNewsYears().includes(Number(selectedYear))) ||(selectedMonth && !getAvailableNewsMonths(selectedYear).includes(Number(selectedMonth))) ){
+ if((selectedYear && !getAvailableNewsYears().includes(Number(selectedYear) as never)) ||(selectedMonth && !getAvailableNewsMonths(selectedYear).includes(Number(selectedMonth) as never)) ){
   throw new Error("Invalid Filter")
  }
 
