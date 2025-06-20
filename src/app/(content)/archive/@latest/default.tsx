@@ -1,4 +1,4 @@
-import NewsList from "@/app/components/NewsList";
+import NewsList from "@/app/(content)/components/NewsList";
 import { getLatestNews } from "@/utils/news";
 
 

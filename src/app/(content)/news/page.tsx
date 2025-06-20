@@ -1,4 +1,4 @@
-import { DUMMY_NEWS } from "../dummyData";
+import { DUMMY_NEWS } from "../../dummyData";
 import NewsList from "../components/NewsList";
 
 export default function news() {
