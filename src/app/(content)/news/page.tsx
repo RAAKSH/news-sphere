@@ -1,11 +1,13 @@
 // /* eslint-disable react-hooks/rules-of-hooks */
 // "use client";
 // import { useEffect, useState } from "react";
+import { getAllNews } from "@/utils/news";
 import NewsList from "../components/NewsList";
 
 export default async function newsPage() {
-  const data = await fetch("http://localhost:8080/news");
-  const news = await data.json();
+  const news= getAllNews();
+  // const data = await fetch("http://localhost:8080/news");
+  // const news = await data.json();
   // if(!news.ok){
   //   throw new Error("Error has occured  ");
   // }
