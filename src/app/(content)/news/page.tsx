@@ -5,7 +5,7 @@ import { getAllNews } from "@/utils/news";
 import NewsList from "../components/NewsList";
 
 export default async function newsPage() {
-  const news= getAllNews();
+  const news= await getAllNews();
   // const data = await fetch("http://localhost:8080/news");
   // const news = await data.json();
   // if(!news.ok){

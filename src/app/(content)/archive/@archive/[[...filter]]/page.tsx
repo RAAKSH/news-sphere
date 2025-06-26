@@ -8,7 +8,7 @@ import {
 import Link from "next/link";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Archive({ params }:any) {
+export default async function Archive({ params }:any) {
   const filter = params?.filter;
   console.log(filter?.[1]);
   const selectedYear = filter?.[0];
@@ -16,7 +16,7 @@ export default function Archive({ params }:any) {
   let news;
   let links = getAvailableNewsYears();
   if(selectedMonth && selectedYear){
-    news= getNewsForYearAndMonth(selectedYear,selectedMonth);
+    news= await getNewsForYearAndMonth(selectedYear,selectedMonth);
     links=[];
   }
 

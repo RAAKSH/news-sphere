@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { DUMMY_NEWS } from "@/app/dummyData";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getNewsItem } from "@/utils/news";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function newDetails({ params }:any) {
+export default async function newDetails({ params }:any) {
   const newsSlug = params?.id;
 
-  const newsItem = DUMMY_NEWS?.find((newsItem) => newsItem.slug === newsSlug);
+  // const newsItem = DUMMY_NEWS?.find((newsItem) => newsItem.slug === newsSlug);
+  const newsItem= await getNewsItem(newsSlug)
 
   if (!newsItem) {
     notFound();
