@@ -1,36 +1,47 @@
-import NewsList from "@/app/(content)/components/NewsList";
+import Link from "next/link";
+
+import NewsList from "../../../components/NewsList";
 import {
   getAvailableNewsMonths,
   getAvailableNewsYears,
   getNewsForYear,
   getNewsForYearAndMonth,
-} from "@/utils/news";
-import Link from "next/link";
+} from "../../../../../utils/news";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function Archive({ params }:any) {
-  const filter = params?.filter;
-  console.log(filter?.[1]);
+export default async function Archive({ params }) {
+  const filter = params.filter;
+
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
+
   let news;
-  let links = getAvailableNewsYears();
-  if(selectedMonth && selectedYear){
-    news= await getNewsForYearAndMonth(selectedYear,selectedMonth);
-    links=[];
-  }
+  let links = await getAvailableNewsYears();
 
   if (selectedYear && !selectedMonth) {
-    news = getNewsForYear(selectedYear);
+    news = await getNewsForYear(selectedYear);
     links = getAvailableNewsMonths(selectedYear);
   }
-  let newsContent = <>No News Found for this selected period</>;
+
+  if (selectedYear && selectedMonth) {
+    news = await getNewsForYearAndMonth(selectedYear, selectedMonth);
+    links = [];
+  }
+
+  let newsContent = <p>No news found for the selected period.</p>;
+
   if (news && news.length > 0) {
     newsContent = <NewsList news={news} />;
   }
- if((selectedYear && !getAvailableNewsYears().includes(Number(selectedYear) as never)) ||(selectedMonth && !getAvailableNewsMonths(selectedYear).includes(Number(selectedMonth) as never)) ){
-  throw new Error("Invalid Filter")
- }
+
+  const availableYears = await getAvailableNewsYears();
+
+  if (
+    (selectedYear && !availableYears.includes(selectedYear)) ||
+    (selectedMonth &&
+      !getAvailableNewsMonths(selectedYear).includes(selectedMonth))
+  ) {
+    throw new Error("Invalid filter.");
+  }
 
   return (
     <>
@@ -42,13 +53,15 @@ export default async function Archive({ params }:any) {
               : `/archive/${link}`;
 
             return (
-              <Link
-                key={link}
-                href={href}
-                className="px-4 py-1 rounded-full bg-gray-500 text-black hover:bg-gray-200 transition"
-              >
-                {link}
-              </Link>
+            
+                <Link
+                  key={link}
+                  href={href}
+                  className="px-4 py-1 rounded-full bg-gray-500 text-black hover:bg-gray-200 transition"
+                >
+                  {link}
+                </Link>
+             
             );
           })}
         </nav>
